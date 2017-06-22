@@ -1,7 +1,26 @@
-# learn-redux
-react redux学习
+项目运行步骤：
 
-#### 在create-react-app 创建的项目中添加`sass/scss`支持  
+```
+> git clone https://github.com/yangbo5207/learn-redux.git
+> cd learn-redux
+> npm install
+> npm start
+```
+
+运行完成后可以通过`http://localhost:3000/`访问项目
+
+如果想要访问public目录中的demo，则直接在上面url后添加对应的html名即可，例如访问`public/demo01.html`，则使用 `http://localhost:3000/demo01.html`
+
+如果想要访问src目录中的demo，则在`src/index.js`中单独引入对应的模块，并访问`http://localhost:3000/`即可。
+例如要访问`src/reduxDemo1`中的demo，则修改`src/index.js`如下
+```
+import './reduxDemo1';
+```
+
+
+
+
+#### 额外知识点：在create-react-app 创建的项目中添加`sass/scss`支持  
 
 
 + 安装sass需要的loader
