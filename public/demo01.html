@@ -73,5 +73,7 @@
         clearTimeout(window.timer);
         window.timer = setTimeout(() => store.dispatch(increment()), 1000);
     })
+
+    // 改动尝试： 在incrementIfOdd和incrementAsync的点击事件中，我将改变逻辑写在了点击事件中，其实为了代码阅读体验，我们还可以将改变逻辑放在reducer来完成
     </script>
 </html>

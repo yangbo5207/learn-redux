@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>redux 与 选项卡</title>
+    </head>
+    <style>
+        #wrapper { width: 400px; margin: 20px auto; }
+        nav { height: 40px; border-bottom: 1px solid #ccc; font-size: 0;}
+        nav .nav-item { display: inline-block; width: 33.3333%; font-size: 14px; text-align: center; height: 100%; line-height: 40px; border: 1px solid #ccc; box-sizing: border-box; }
+        nav .active { background: orange; color: #FFF; }
+        .content { height: 200px; border: 1px solid blue; }
+        .content-item { height: 100%; text-align: center; font-size: 50px; display: none; }
+        .content-item.active { display: block; }
+
+    </style>
+    <body>
+        <div id="wrapper">
+            <nav>
+                <div class="nav-item active" data-index="0">1</div>
+                <div class="nav-item" data-index="1">2</div>
+                <div class="nav-item" data-index="2">3</div>
+            </nav>
+            <div class="content">
+                <div class="content-item active" data-index="0">1</div>
+                <div class="content-item" data-index="1">2</div>
+                <div class="content-item" data-index="2">3</div>
+            </div>
+        </div>
+    </body>
+    <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+    <script>
+
+    // 1. 初始化状态，该状态树仅仅用于方便观察我们的实际状态结构，我们只需要在创建reducer时，reduer函数的命名与属性一直，得到的store树就会与该状态结构一致。
+    const states = {
+        index: 0,
+        preIndex: 0
+    }
+
+    // 2. 创建action函数
+    function switchtab(index, preIndex) {
+        index = parseInt(index);
+        preIndex = parseInt(preIndex);
+        return {
+            type: 'SET_INDEX',
+            index,
+            preIndex
+        }
+    }
+
+    // 3. 创建reducer函数
+    function index(state = states.index, action) {
+        switch (action.type) {
+            case 'SET_INDEX':
+                return action.index
+            default:
+                return state;
+        }
+    }
+    function preIndex(state = states.preIndex, action) {
+        switch (action.type) {
+            case 'SET_INDEX':
+                return action.preIndex
+            default:
+                return state
+        }
+    }
+
+    // 4. 合并所有的reducer
+    const reducer = Redux.combineReducers({ index, preIndex });
+
+    // 5. 利用redux中的api生成store
+    const store = Redux.createStore(reducer);
+
+    // 查看初始状态树
+    console.log(store.getState());
+
+    // 6. 创建UI改变的函数
+    const nav = document.querySelector('nav');
+    const content = document.querySelector('.content');
+    const navChilds = [].slice.call(nav.children);
+    const contentChilds = [].slice.call(content.children);
+
+    function render() {
+        console.log(store.getState());
+        const index = store.getState().index;
+        const preIndex = store.getState().preIndex;
+
+        navChilds[preIndex].className = 'nav-item';
+        contentChilds[preIndex].className = 'content-item';
+
+        navChilds[index].className = 'nav-item active';
+        contentChilds[index].className = 'content-item active';
+    }
+
+    // 7. 订阅UI改变
+    store.subscribe(render);
+
+    // 8. 事件触发时，发送通知
+    nav.onclick = function(e) {
+        store.dispatch(switchtab(e.target.dataset.index, store.getState().index));
+    }
+
+    </script>
+</html>
