@@ -1,4 +1,4 @@
 /**
  * 仅仅只是readux的使用
  */
-import './reduxDemo2';
+import './reduxDemo1';

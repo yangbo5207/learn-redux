@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters } from './actions';
 import states from './state';
 
-const { SHOW_ALL } = VisibilityFilters;
+// const { SHOW_ALL } = VisibilityFilters;
 
 function visibilityFilter(state = states.visibilityFilter, action) {
     switch (action.type) {
@@ -17,7 +17,7 @@ function todos(state = states.todos, action) {
     switch (action.type) {
         case ADD_TODO:
              return [ ...state, {
-                 text: action.type,
+                 text: action.text,
                  completed: false
              }];
         case TOGGLE_TODO:
@@ -27,7 +27,7 @@ function todos(state = states.todos, action) {
                         completed: !todo.completed
                     })
                 }
-                return
+                return todo;
             });
         default:
             return state;
