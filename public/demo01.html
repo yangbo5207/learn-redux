@@ -19,7 +19,8 @@
     <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
     <script>
 
-    // 1. 初始化状态，该状态树仅仅用于方便观察我们的实际状态结构，我们只需要在创建reducer时，reduer函数的命名与属性一直，得到的store树就会与该状态结构一致。
+    // 1. 初始化状态，该状态树仅仅用于方便观察我们的实际状态结构，
+    // 我们只需要在创建reducer时，reduer函数的命名与属性一致，得到的store树就会与该状态结构一致。
     const states = {
         number: 0
     }
@@ -74,6 +75,7 @@
         window.timer = setTimeout(() => store.dispatch(increment()), 1000);
     })
 
-    // 改动尝试： 在incrementIfOdd和incrementAsync的点击事件中，我将改变逻辑写在了点击事件中，其实为了代码阅读体验，我们还可以将改变逻辑放在reducer来完成
+    // 改动尝试： 在incrementIfOdd和incrementAsync的点击事件中，
+    // 我将改变逻辑写在了点击事件中，其实为了代码阅读体验，我们还可以将改变逻辑放在reducer来完成
     </script>
 </html>
